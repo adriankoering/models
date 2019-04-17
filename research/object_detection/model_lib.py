@@ -685,7 +685,8 @@ def create_train_and_eval_specs(train_input_fn,
                                 train_steps,
                                 eval_on_train_data=False,
                                 final_exporter_name='Servo',
-                                eval_spec_names=None):
+                                eval_spec_names=None,
+                                throttle_secs=600):
   """Creates a `TrainSpec` and `EvalSpec`s.
 
   Args:
@@ -700,6 +701,7 @@ def create_train_and_eval_specs(train_input_fn,
       False.
     final_exporter_name: String name given to `FinalExporter`.
     eval_spec_names: A list of string names for each `EvalSpec`.
+    throttle_secs: Number of seconds between evaluation runs.
 
   Returns:
     Tuple of `TrainSpec` and list of `EvalSpecs`. If `eval_on_train_data` is
@@ -729,7 +731,7 @@ def create_train_and_eval_specs(train_input_fn,
             input_fn=eval_input_fn,
             steps=None,
             exporters=exporter,
-            throttle_secs=FLAGS.throttle_secs))
+            throttle_secs=throttle_secs))
 
   if eval_on_train_data:
     eval_specs.append(
