@@ -53,6 +53,8 @@ flags.DEFINE_boolean(
     'run_once', False, 'If running in eval-only mode, whether to run just '
     'one round of eval vs running continuously (default).'
 )
+flags.DEFINE_integer('throttle_secs', 600, 'Perform evaluation once every '
+                     '"throttle_secs" many seconds.')
 FLAGS = flags.FLAGS
 
 
